@@ -4,6 +4,10 @@ require 'optparse'
 require 'bundler/setup'
 require 'eventmachine'
 
+$:.unshift File.expand_path("../../lib", __FILE__)
+
+require 'slanger'
+
 options = {
   api_host: '0.0.0.0', api_port: '4567', websocket_host: '0.0.0.0',
   websocket_port: '8080', debug: false, redis_address: 'redis://0.0.0.0:6379/0'
@@ -84,7 +88,6 @@ EM.epoll
 EM.kqueue
 
 EM.run do
-  File.tap { |f| require f.expand_path(f.join(f.dirname(__FILE__),'..', 'slanger.rb')) }
   Slanger::Config.load options
   Slanger::Service.run
 
@@ -108,4 +111,6 @@ EM.run do
 
   puts "Slanger API server listening on port #{options[:api_port]}"
   puts "Slanger WebSocket server listening on port #{options[:websocket_port]}"
+
+  $stdout.flush
 end

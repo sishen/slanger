@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency    'webmock',          '~> 1.8.7'
   s.add_development_dependency    'mocha',            '~> 0.13.2'
 
-  s.files                       = Dir['README.md', 'lib/**/*', 'slanger.rb']
+  s.files                       = Dir['README.md', 'lib/**/*']
   s.require_path                = '.'
 
   s.executables << 'slanger'
