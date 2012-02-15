@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'lib/slanger/handler.rb'
+require 'slanger/handler.rb'
 
 class ReplacedHandler < Slanger::Handler
   def authenticate

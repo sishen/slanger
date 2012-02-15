@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.add_dependency                'eventmachine',     '~> 0.12.10'
   s.add_dependency                'em-hiredis',       '~> 0.1.0'
   s.add_dependency                'em-websocket',     '~> 0.3.5'
-  s.add_dependency                'rack',             '~> 1.5'
+  s.add_dependency                'rack',             '~> 1.4.5'
   s.add_dependency                'rack-fiber_pool',  '~> 0.9.2'
   s.add_dependency                'signature',        '~> 0.1.6'
   s.add_dependency                'activesupport',    '~> 3.1'
@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency    'mocha',            '~> 0.13.2'
 
   s.files                       = Dir['README.md', 'lib/**/*']
-  s.require_path                = '.'
+  s.require_path                = ['lib']
 
   s.executables << 'slanger'
 end
