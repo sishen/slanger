@@ -26,11 +26,13 @@ module Slanger
       data = JSON.parse(request.body.read.tap{ |s| s.force_encoding('utf-8')})
 
       # Send event to each channel
+      params[:socket_id] = data["socket_id"] if data.key?("socket_id")
       data["channels"].each { |channel| publish(channel, data['name'], data['data']) }
 
       return {}.to_json
     end
 
+    # Deprecated on 2012-09: http://pusher.com/docs/rest_api_deprecated#method-post-event
     post '/apps/:app_id/channels/:channel_id/events' do
       authenticate
 
