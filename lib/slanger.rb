@@ -20,4 +20,5 @@ module Slanger
   autoload :Subscription, 'slanger/subscription'
   autoload :WebSocketServer, 'slanger/web_socket_server'
   autoload :Webhook, 'slanger/webhook'
+  autoload :VERSION, 'slanger/version'
 end
