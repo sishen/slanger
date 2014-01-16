@@ -14,7 +14,7 @@ module Slanger
       hmac     = OpenSSL::HMAC.hexdigest(digest, Slanger::Config.secret, payload)
 
       EM::HttpRequest.new(Slanger::Config.webhook_url).
-        post(body: payload, head: { "X-Pusher-Key" => Slanger::Config.app_key, "X-Pusher-Secret" => hmac })
+        post(body: payload, head: { "X-Pusher-Key" => Slanger::Config.app_key, "X-Pusher-Signature" => hmac, "Content-Type" => "application/json" })
         # TODO: Exponentially backed off retries for errors
     end
 

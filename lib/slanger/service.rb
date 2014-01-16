@@ -7,6 +7,7 @@ module Slanger
       Slanger::Config[:require].each { |f| require f }
       Thin::Logging.silent = true
       Rack::Handler::Thin.run Slanger::ApiServer, Host: Slanger::Config.api_host, Port: Slanger::Config.api_port
+      Slanger::Redis.del('channel_subscriber_count')
       Slanger::WebSocketServer.run
     end
 
