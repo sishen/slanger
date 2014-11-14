@@ -59,6 +59,10 @@ OptionParser.new do |opts|
     options[:tls_options][:cert_chain_file] = p
   end
 
+  opts.on '--pid_file PIDFILE', "The Slanger process ID file name." do |k|
+    options[:pid_file] = k
+  end
+
   opts.on "-v", "--[no-]verbose", "Run verbosely" do |v|
     options[:debug] = v
   end
@@ -89,6 +93,12 @@ EM.kqueue
 
 EM.run do
   Slanger::Config.load options
+
+  # Write PID to file
+  unless options[:pid_file].nil?
+    File.open(options[:pid_file], 'w') { |f| f.puts Process.pid }
+  end
+
   Slanger::Service.run
 
   puts "\n"

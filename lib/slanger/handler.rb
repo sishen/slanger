@@ -12,8 +12,9 @@ module Slanger
     attr_accessor :connection
     delegate :error, :send_payload, to: :connection
 
-    def initialize(socket)
+    def initialize(socket, handshake)
       @socket        = socket
+      @handshake     = handshake
       @connection    = Connection.new(@socket)
       @subscriptions = {}
       authenticate
@@ -79,7 +80,12 @@ module Slanger
     private
 
     def app_key
-      @socket.request['path'].split(/\W/)[2]
+      @handshake.path.split(/\W/)[2]
+    end
+
+    def protocol_version
+      @query_string ||= Rack::Utils.parse_nested_query(@handshake.query_string)
+      @query_string["protocol"].to_i || -1
     end
 
     def valid_app_key? app_key
