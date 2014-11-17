@@ -18,11 +18,11 @@ module Slanger
     end
 
     def publisher
-      @publisher ||= new_connection
+      @publisher ||= new_connection.pubsub
     end
 
     def subscriber
-      @subscriber ||= new_connection.tap do |c|
+      @subscriber ||= new_connection.pubsub.tap do |c|
         c.on(:message) do |channel, message|
           message = JSON.parse message
           c = Channel.from message['channel']
